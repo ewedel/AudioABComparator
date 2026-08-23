@@ -59,10 +59,10 @@ QByteArray makeTonePcm(
 }
 
 bool writeTone(const QString &path, double frequency, quint32 sampleRate = 48'000,
-    quint16 channelCount = 2, double amplitude = 8'000.0)
+    quint16 channelCount = 2, double amplitude = 8'000.0,
+    quint32 durationSeconds = 8, double audibleUntilSeconds = -1.0)
 {
     constexpr quint16 bitsPerSample = 16;
-    constexpr quint32 durationSeconds = 8;
     const quint32 frameCount = sampleRate * durationSeconds;
     const quint32 bytesPerFrame = channelCount * (bitsPerSample / 8);
     const quint32 dataSize = frameCount * bytesPerFrame;
@@ -84,9 +84,14 @@ bool writeTone(const QString &path, double frequency, quint32 sampleRate = 48'00
     stream << dataSize;
 
     constexpr double tau = 6.28318530717958647692;
+    const qint64 audibleUntilFrame = audibleUntilSeconds >= 0.0
+        ? qRound64(audibleUntilSeconds * sampleRate)
+        : frameCount;
     for (quint32 frame = 0; frame < frameCount; ++frame) {
         const double phase = tau * frequency * static_cast<double>(frame) / sampleRate;
-        const qint16 sample = static_cast<qint16>(std::sin(phase) * amplitude);
+        const qint16 sample = frame < audibleUntilFrame
+            ? static_cast<qint16>(std::sin(phase) * amplitude)
+            : 0;
         for (quint16 channel = 0; channel < channelCount; ++channel) {
             stream << sample;
         }
@@ -131,6 +136,7 @@ private slots:
     void staleSelectionAnalysisIsIgnored();
     void selectionUsesEachNativeSampleRate();
     void convertsMismatchedTracksForPlayback();
+    void waveformsUseTheCommonDuration();
     void decodesPairAndEnforcesFiveSecondSelection();
     void playbackAdvancesWithDefaultOutput();
     void validatesExternalReleaseFormats();
@@ -595,6 +601,35 @@ void AudioEngineTest::convertsMismatchedTracksForPlayback()
         QVERIFY(engine.trackBPlaybackSummary().startsWith(QStringLiteral("Playback conversion:")));
     }
     QTRY_COMPARE_WITH_TIMEOUT(engine.analysis()->selectionState(), AnalysisController::Ready, 15'000);
+}
+
+void AudioEngineTest::waveformsUseTheCommonDuration()
+{
+    constexpr int expectedWaveformPointCount = 900;
+    QTemporaryDir directory;
+    QVERIFY(directory.isValid());
+    const QString trackA = directory.filePath(QStringLiteral("long-a.wav"));
+    const QString trackB = directory.filePath(QStringLiteral("short-b.wav"));
+    QVERIFY(writeTone(trackA, 440.0, 48'000, 2, 8'000.0, 10, 4.0));
+    QVERIFY(writeTone(trackB, 440.0, 48'000, 2, 8'000.0, 8, 4.0));
+
+    AudioEngine engine;
+    engine.loadA(QUrl::fromLocalFile(trackA));
+    QTRY_VERIFY_WITH_TIMEOUT(!engine.loading(), 15'000);
+    engine.loadB(QUrl::fromLocalFile(trackB));
+    QTRY_VERIFY_WITH_TIMEOUT(engine.ready(), 15'000);
+
+    QVERIFY(engine.duration() >= 7.9 && engine.duration() <= 8.0);
+    QCOMPARE(engine.waveformA().size(), expectedWaveformPointCount);
+    QCOMPARE(engine.waveformB().size(), expectedWaveformPointCount);
+    for (int point = 0; point < expectedWaveformPointCount; ++point) {
+        const double peakA = engine.waveformA().at(point).toDouble();
+        const double peakB = engine.waveformB().at(point).toDouble();
+        QVERIFY2(std::abs(peakA - peakB) < 1.0e-6,
+            qPrintable(QStringLiteral("point %1: A=%2 B=%3").arg(point).arg(peakA).arg(peakB)));
+    }
+    QVERIFY(engine.waveformA().at(400).toDouble() > 0.1);
+    QVERIFY(engine.waveformA().at(500).toDouble() < 1.0e-6);
 }
 
 void AudioEngineTest::decodesPairAndEnforcesFiveSecondSelection()

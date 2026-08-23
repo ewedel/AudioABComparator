@@ -302,6 +302,8 @@ void AudioEngine::updateReadyState()
         qRound64(m_duration * m_format.sampleRate()),
         std::min(m_pcmA.size(), m_pcmB.size()) / m_format.bytesPerFrame());
     m_duration = framesToSeconds(commonFrames);
+    m_waveformA = buildWaveform(m_nativePcmA, m_nativeFormatA, m_duration);
+    m_waveformB = buildWaveform(m_nativePcmB, m_nativeFormatB, m_duration);
     m_selectionStart = 0.0;
     m_selectionEnd = m_duration;
     m_position = 0.0;
@@ -317,6 +319,8 @@ void AudioEngine::updateReadyState()
     setStatusMessage(QT_TR_NOOP("Ready — first playback will start on A"));
     clearErrorMessage();
     emit readyChanged();
+    emit waveformAChanged();
+    emit waveformBChanged();
     emit selectionChanged();
     emit positionChanged();
     emit activeTrackChanged();
@@ -956,19 +960,24 @@ void AudioEngine::resetAndUpdateLiveAnalysis()
     updateLiveAnalysis();
 }
 
-QVariantList AudioEngine::buildWaveform(const QByteArray &pcm, const QAudioFormat &format) const
+QVariantList AudioEngine::buildWaveform(
+    const QByteArray &pcm, const QAudioFormat &format, double durationSeconds) const
 {
     QVariantList result;
-    if (pcm.isEmpty() || format.bytesPerFrame() <= 0) {
+    if (pcm.isEmpty() || format.bytesPerFrame() <= 0 || format.sampleRate() <= 0) {
         return result;
     }
 
-    const qint64 frameCount = pcm.size() / format.bytesPerFrame();
-    const qint64 framesPerPoint = std::max<qint64>(1, frameCount / waveformPointCount);
-    result.reserve(static_cast<int>(std::min<qint64>(waveformPointCount, frameCount)));
+    const qint64 availableFrameCount = pcm.size() / format.bytesPerFrame();
+    const qint64 frameCount = durationSeconds > 0.0
+        ? std::min(availableFrameCount, qRound64(durationSeconds * format.sampleRate()))
+        : availableFrameCount;
+    const qint64 pointCount = std::min<qint64>(waveformPointCount, frameCount);
+    result.reserve(static_cast<int>(pointCount));
 
-    for (qint64 begin = 0; begin < frameCount; begin += framesPerPoint) {
-        const qint64 end = std::min(frameCount, begin + framesPerPoint);
+    for (qint64 point = 0; point < pointCount; ++point) {
+        const qint64 begin = point * frameCount / pointCount;
+        const qint64 end = (point + 1) * frameCount / pointCount;
         float peak = 0.0F;
         for (qint64 frame = begin; frame < end; ++frame) {
             for (int channel = 0; channel < format.channelCount(); ++channel) {
@@ -976,9 +985,6 @@ QVariantList AudioEngine::buildWaveform(const QByteArray &pcm, const QAudioForma
             }
         }
         result.append(peak);
-        if (result.size() >= waveformPointCount) {
-            break;
-        }
     }
     return result;
 }

@@ -1,4 +1,4 @@
-Audio A/B Comparator 1.0.0
+Audio A/B Comparator 1.0.1
 KarmaApps by KarmaGame
 
 PORTABLE WINDOWS RELEASE

@@ -223,7 +223,8 @@ private:
     void selectBlindTrack(bool selectionCommand);
     void vote(int delta);
     void resetBlindState(bool returnToExpress);
-    [[nodiscard]] QVariantList buildWaveform(const QByteArray &pcm, const QAudioFormat &format) const;
+    [[nodiscard]] QVariantList buildWaveform(const QByteArray &pcm, const QAudioFormat &format,
+        double durationSeconds = -1.0) const;
     [[nodiscard]] QString sourceSummary(Track track) const;
     [[nodiscard]] QString playbackSummary(Track track) const;
     [[nodiscard]] static QString formatSummary(const QAudioFormat &format);

@@ -48,7 +48,7 @@ $smokeProcess = Start-Process -FilePath $executable -ArgumentList '--smoke-test'
     -RedirectStandardOutput $smokeStdout -RedirectStandardError $smokeStderr
 $smokeOutput = (Get-Content -LiteralPath $smokeStdout -Raw -ErrorAction SilentlyContinue) +
     (Get-Content -LiteralPath $smokeStderr -Raw -ErrorAction SilentlyContinue)
-if ($smokeProcess.ExitCode -ne 0 -or $smokeOutput -notmatch 'SMOKE_VERSION=1\.0\.0') {
+if ($smokeProcess.ExitCode -ne 0 -or $smokeOutput -notmatch 'SMOKE_VERSION=1\.0\.1') {
     throw "QML smoke test failed with exit code $($smokeProcess.ExitCode):`n$smokeOutput"
 }
 Write-Host $smokeOutput

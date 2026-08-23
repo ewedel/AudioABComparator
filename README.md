@@ -24,15 +24,15 @@ Everything runs locally. No audio is uploaded, and the application has no accoun
 
 ## Download
 
-Version **1.0.0** is available as a portable ZIP for **Windows 10 and Windows 11 x64** and as an AppImage for **Linux x86_64**. Download the binary and `SHA256SUMS` from the [GitHub Releases page](https://github.com/KarmaGame33/AudioABComparator/releases). Do not download binaries from the repository source tree.
+Version **1.0.1** is available as a portable ZIP for **Windows 10 and Windows 11 x64** and as an AppImage for **Linux x86_64**. Download the binary and `SHA256SUMS` from the [GitHub Releases page](https://github.com/KarmaGame33/AudioABComparator/releases). Do not download binaries from the repository source tree.
 
 The Windows build is unsigned. SmartScreen may display a warning because the executable has no Authenticode signature or established reputation. Verify the SHA-256 checksum, extract the complete ZIP, then run `ab-compare.exe` from the extracted folder.
 
 On Linux, make the AppImage executable and run it without installation:
 
 ```sh
-chmod +x AudioABComparator-1.0.0-linux-x86_64.AppImage
-./AudioABComparator-1.0.0-linux-x86_64.AppImage
+chmod +x AudioABComparator-1.0.1-linux-x86_64.AppImage
+./AudioABComparator-1.0.1-linux-x86_64.AppImage
 ```
 
 ## Features
@@ -131,6 +131,6 @@ Les principales fonctions sont :
 
 Tout fonctionne localement sur l’ordinateur : aucun fichier audio n’est envoyé sur un serveur et l’application ne contient ni compte utilisateur ni télémétrie. Les chemins des fichiers, les votes et les sessions d’écoute ne sont pas conservés après sa fermeture.
 
-La version **1.0.0** est proposée en ZIP portable pour **Windows 10 et Windows 11 x64** et en AppImage pour **Linux x86_64** sur la page [GitHub Releases](https://github.com/KarmaGame33/AudioABComparator/releases). Vérifiez `SHA256SUMS` avant de lancer le binaire. Sous Windows, extrayez tout le ZIP puis lancez `ab-compare.exe` ; sous Linux, rendez l’AppImage exécutable avec `chmod +x`, puis lancez-la directement. Les retours se font uniquement par les [Issues GitHub](https://github.com/KarmaGame33/AudioABComparator/issues).
+La version **1.0.1** est proposée en ZIP portable pour **Windows 10 et Windows 11 x64** et en AppImage pour **Linux x86_64** sur la page [GitHub Releases](https://github.com/KarmaGame33/AudioABComparator/releases). Vérifiez `SHA256SUMS` avant de lancer le binaire. Sous Windows, extrayez tout le ZIP puis lancez `ab-compare.exe` ; sous Linux, rendez l’AppImage exécutable avec `chmod +x`, puis lancez-la directement. Les retours se font uniquement par les [Issues GitHub](https://github.com/KarmaGame33/AudioABComparator/issues).
 
 **Tous les retours sont les bienvenus**, notamment sur l’ergonomie, le fonctionnement du Blind Test, les raccourcis et la compatibilité audio. Vous pouvez signaler les problèmes reproductibles et proposer des améliorations dans les [Issues GitHub](https://github.com/KarmaGame33/AudioABComparator/issues).

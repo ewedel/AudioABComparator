@@ -4,6 +4,12 @@ All notable changes to Audio A/B Comparator are documented in this file. Public 
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-08-23
+
+### Fixed
+
+- render both waveforms on the same common playback duration when the loaded tracks have different lengths, avoiding an artificial horizontal offset while preserving timing differences actually present in the audio.
+
 ## [1.0.0] - 2026-08-22
 
 ### Changed
@@ -134,7 +140,8 @@ All notable changes to Audio A/B Comparator are documented in this file. Public 
 
 - playback start, stop and resume behaviour.
 
-[Unreleased]: https://github.com/KarmaGame33/AudioABComparator/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/KarmaGame33/AudioABComparator/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/KarmaGame33/AudioABComparator/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/KarmaGame33/AudioABComparator/releases/tag/v1.0.0
 [0.3.0-beta.3]: https://github.com/KarmaGame33/AudioABComparator/releases/tag/v0.3.0-beta.3
 [0.3.0-beta.2]: https://github.com/KarmaGame33/AudioABComparator/releases/tag/v0.3.0-beta.2
