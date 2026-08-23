@@ -29,17 +29,17 @@
   <url type="bugtracker">https://github.com/KarmaGame33/AudioABComparator/issues</url>
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/KarmaGame33/AudioABComparator/main/docs/media/audio-ab-comparator.png</image>
+      <image>https://raw.githubusercontent.com/KarmaGame33/AudioABComparator/main/docs/media/en_audio-ab-comparator.png</image>
       <caption>Express comparison with a shared timeline</caption>
       <caption xml:lang="fr">Comparaison Express avec une timeline commune</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/KarmaGame33/AudioABComparator/main/docs/media/audio-ab-comparator-analysis.png</image>
+      <image>https://raw.githubusercontent.com/KarmaGame33/AudioABComparator/main/docs/media/en_audio-ab-comparator-analysis.png</image>
       <caption>Native PCM mastering analysis for both tracks</caption>
       <caption xml:lang="fr">Analyse mastering du PCM natif des deux pistes</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/KarmaGame33/AudioABComparator/main/docs/media/audio-ab-comparator-analysis-live.png</image>
+      <image>https://raw.githubusercontent.com/KarmaGame33/AudioABComparator/main/docs/media/en_audio-ab-comparator-analysis-live.png</image>
       <caption>Paired A/B live meters with minimum and maximum markers</caption>
       <caption xml:lang="fr">Vumètres A/B simultanés avec repères minimum et maximum</caption>
     </screenshot>

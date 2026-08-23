@@ -8,23 +8,19 @@ Everything runs locally. No audio is uploaded, and the application has no accoun
 
 ### Dark theme
 
-![Audio A/B Comparator interface](docs/media/audio-ab-comparator.png)
+![Audio A/B Comparator interface](docs/media/en_audio-ab-comparator.png)
 
 ### Light theme
 
-![Audio A/B Comparator in light mode](docs/media/audio-ab-comparator-light.png)
+![Audio A/B Comparator in light mode](docs/media/en_audio-ab-comparator-light.png)
 
 ### Blind Test
 
-![Audio A/B Comparator Blind Test screen](docs/media/audio-ab-comparator-blind-test.png)
+![Audio A/B Comparator Blind Test screen](docs/media/en_audio-ab-comparator-blind-test.png)
 
 ### Mastering Analysis & Paired live meters
 
-![Audio A/B Comparator paired A/B live meters](docs/media/audio-ab-comparator-analysis-live.png)
-
-### Demonstration
-
-![Express, light theme and Blind Test demonstration](docs/media/audio-ab-comparator-demo.gif)
+![Audio A/B Comparator paired A/B live meters](docs/media/en_audio-ab-comparator-analysis-live.png)
 
 ## Download
 
@@ -91,6 +87,30 @@ Audio A/B Comparator is licensed under **GPL-3.0-or-later**. Runtime dependency 
 **Audio A/B Comparator — KarmaApps par KarmaGame** est une application de bureau gratuite et open source destinée à comparer deux versions d’un mixage, d’un master ou d’une prise de son.
 
 L’idée est de pouvoir se concentrer sur l’écoute, sans avoir à jongler entre plusieurs pistes dans un DAW.
+
+### Thème sombre
+
+![Interface d’Audio A/B Comparator en thème sombre](docs/media/fr_audio-ab-comparator.png)
+
+### Thème clair
+
+![Interface d’Audio A/B Comparator en thème clair](docs/media/fr_audio-ab-comparator-light.png)
+
+### Blind Test
+
+![Écran Blind Test d’Audio A/B Comparator](docs/media/fr_audio-ab-comparator-blind-test.png)
+
+### Analyse mastering
+
+![Tableau d’analyse mastering d’Audio A/B Comparator](docs/media/fr_audio-ab-comparator-analysis.png)
+
+### Vumètres A/B en temps réel
+
+![Vumètres A/B en temps réel d’Audio A/B Comparator](docs/media/fr_audio-ab-comparator-analysis-live.png)
+
+### Démonstration
+
+![Démonstration des modes Express, thème clair et Blind Test](docs/media/fr_audio-ab-comparator-demo.gif)
 
 Les principales fonctions sont :
 
