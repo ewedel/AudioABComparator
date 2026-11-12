@@ -833,7 +833,7 @@ void AudioEngineTest::validatesExternalReleaseFormats()
         QSKIP("Aucun périphérique de sortie audio n'est disponible.");
     }
 
-    for (const QString &extension : {QStringLiteral("wav"), QStringLiteral("flac"), QStringLiteral("mp3")}) {
+    for (const QString &extension : {QStringLiteral("wav"), QStringLiteral("flac"), QStringLiteral("mp3"), QStringLiteral("opus")}) {
         const QString trackA = fixtureDirectory + QStringLiteral("/track-a.") + extension;
         const QString trackB = fixtureDirectory + QStringLiteral("/track-b.") + extension;
         QVERIFY2(QFile::exists(trackA), qPrintable(trackA));

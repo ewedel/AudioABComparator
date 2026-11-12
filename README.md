@@ -37,7 +37,7 @@ chmod +x AudioABComparator-1.0.1-linux-x86_64.AppImage
 
 ## Features
 
-- local WAV, FLAC, MP3, AIFF and Ogg loading through Qt Multimedia;
+- local WAV, FLAC, MP3, AIFF, Ogg and Opus loading through Qt Multimedia;
 - shared interactive timeline, waveform overview and selection;
 - play, pause, stop, loop and five-second navigation;
 - instant A/B switching with a short anti-click crossfade;
@@ -114,7 +114,7 @@ L’idée est de pouvoir se concentrer sur l’écoute, sans avoir à jongler en
 
 Les principales fonctions sont :
 
-- chargement de deux pistes WAV, FLAC, MP3, AIFF ou Ogg ;
+- chargement de deux pistes WAV, FLAC, MP3, AIFF, Ogg ou Opus ;
 - bascule instantanée entre A et B pendant la lecture ;
 - timeline commune parfaitement synchronisée ;
 - définition d’une zone de lecture avec points de début et de fin ;

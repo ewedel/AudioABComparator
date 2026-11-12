@@ -75,13 +75,13 @@ ApplicationWindow {
     FileDialog {
         id: fileA
         title: qsTr("Choose track A")
-        nameFilters: [qsTr("Audio (*.wav *.wave *.flac *.aif *.aiff *.mp3 *.ogg)"), qsTr("All files (*)")]
+        nameFilters: [qsTr("Audio (*.wav *.wave *.flac *.aif *.aiff *.mp3 *.ogg *.opus)"), qsTr("All files (*)")]
         onAccepted: audioEngine.loadA(selectedFile)
     }
     FileDialog {
         id: fileB
         title: qsTr("Choose track B")
-        nameFilters: [qsTr("Audio (*.wav *.wave *.flac *.aif *.aiff *.mp3 *.ogg)"), qsTr("All files (*)")]
+        nameFilters: [qsTr("Audio (*.wav *.wave *.flac *.aif *.aiff *.mp3 *.ogg *.opus)"), qsTr("All files (*)")]
         onAccepted: audioEngine.loadB(selectedFile)
     }
 

@@ -43,7 +43,7 @@ mkdir -p "$fixture_dir"
 for track_spec in "a:440" "b:660"; do
     track=${track_spec%%:*}
     frequency=${track_spec##*:}
-    for extension in wav flac mp3; do
+    for extension in wav flac mp3 opus; do
         ffmpeg -hide_banner -loglevel error -y \
             -f lavfi -i "sine=frequency=${frequency}:duration=8" \
             -ar 48000 -ac 2 "$fixture_dir/track-${track}.${extension}"

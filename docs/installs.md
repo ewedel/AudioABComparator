@@ -120,7 +120,7 @@ Docker doit être installé et accessible à l’utilisateur courant. Depuis la 
 ./scripts/linux/build-appimage-container.sh
 ```
 
-Le script construit l’application dans une image Ubuntu 22.04 LTS figée, installe Qt 6.9.3, exécute CTest avec des pistes WAV, FLAC et MP3 et assemble les plugins Qt Multimedia, XCB et Wayland. Les outils `linuxdeploy` et `linuxdeploy-plugin-qt` téléchargés sont contrôlés par SHA-256.
+Le script construit l’application dans une image Ubuntu 22.04 LTS figée, installe Qt 6.9.3, exécute CTest avec des pistes WAV, FLAC, MP3 et Opus et assemble les plugins Qt Multimedia, XCB et Wayland. Les outils `linuxdeploy` et `linuxdeploy-plugin-qt` téléchargés sont contrôlés par SHA-256.
 La construction vérifie aussi que l’intégration cliente Qt Wayland-EGL et le thème `xdgdesktopportal` sont réellement présents dans l’AppImage finale. Sous Linux, l’application préfère le portail de bureau pour obtenir le sélecteur de fichiers du système lorsqu’une session D-Bus est disponible et que le service portail répond. Cette logique est intégrée au binaire et s’applique donc également à `build/linux-release/app/ab-compare`, pas seulement à l’AppImage. La sonde est limitée à une seconde. L’application respecte un éventuel `QT_QPA_PLATFORMTHEME` défini par l’utilisateur et conserve le dialogue Qt Quick comme solution de repli si la sonde, le service ou son outil d’interrogation manque.
 
 Les fichiers produits sont :
@@ -221,6 +221,20 @@ cmake -S . -B build\windows-release -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_
 ```powershell
 cmake --build build\windows-release --parallel
 $env:PATH = 'C:\Qt\6.9.3\msvc2022_64\bin;' + $env:PATH
+ctest --test-dir build\windows-release --output-on-failure
+```
+
+Le test de régression sur formats réels (`validatesExternalReleaseFormats`) ne s’exécute que si `AB_COMPARE_TEST_FORMAT_DIR` désigne un dossier contenant `track-a` et `track-b` en WAV, FLAC, MP3 et Opus. Avec FFmpeg disponible, les fixtures peuvent être générées ainsi :
+
+```powershell
+$fixtures = 'C:\Dev\audioab-format-fixtures'
+New-Item -ItemType Directory -Path $fixtures -Force | Out-Null
+foreach ($track in @(@('a', 440), @('b', 660))) {
+    foreach ($extension in 'wav', 'flac', 'mp3', 'opus') {
+        ffmpeg -hide_banner -loglevel error -y -f lavfi -i "sine=frequency=$($track[1]):duration=8" -ar 48000 -ac 2 "$fixtures\track-$($track[0]).$extension"
+    }
+}
+$env:AB_COMPARE_TEST_FORMAT_DIR = $fixtures
 ctest --test-dir build\windows-release --output-on-failure
 ```
 

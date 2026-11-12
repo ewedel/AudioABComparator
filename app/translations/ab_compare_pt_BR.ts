@@ -497,8 +497,8 @@
     <message>
         <location filename="../ui/Main.qml" line="68"/>
         <location filename="../ui/Main.qml" line="74"/>
-        <source>Audio (*.wav *.wave *.flac *.aif *.aiff *.mp3 *.ogg)</source>
-        <translation>Audio (*.wav *.wave *.flac *.aif *.aiff *.mp3 *.ogg)</translation>
+        <source>Audio (*.wav *.wave *.flac *.aif *.aiff *.mp3 *.ogg *.opus)</source>
+        <translation>Audio (*.wav *.wave *.flac *.aif *.aiff *.mp3 *.ogg *.opus)</translation>
     </message>
     <message>
         <location filename="../ui/Main.qml" line="68"/>

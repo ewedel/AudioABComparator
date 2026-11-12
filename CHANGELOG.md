@@ -4,6 +4,10 @@ All notable changes to Audio A/B Comparator are documented in this file. Public 
 
 ## [Unreleased]
 
+### Added
+
+- Opus (`.opus`) files in the open-file dialogs, decoded by the FFmpeg backend bundled with Qt Multimedia; Opus fixtures added to the real-format regression test.
+
 ## [1.0.1] - 2026-08-23
 
 ### Fixed
